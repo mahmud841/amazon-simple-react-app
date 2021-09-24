@@ -4,15 +4,22 @@ import './Cart.css';
 const Cart = (props) => {
   // console.log(props.cart);
   const {cart} = props;
-  const total = cart.reduce((previous, product )=> previous + product.price, 0 );
- /*  let total = 0;
+  console.log(cart);
+  
+  // const total = cart.reduce((previous, product )=> previous + product.price, 0 );
+  let totalQuantity = 0;
+  let total = 0;
   for (const product of cart) {
-    total = total + product.price;
-  } */
+    if(!product.quantity){
+      product.quantity =1 ;
+    }
+    total = total + product.price * product.quantity;
+    totalQuantity = totalQuantity + product.quantity;
+  } 
   
 
-  const shipping = 15;
-  const tax = (total + shipping) * 10; 
+  const shipping = total > 0 ? 15 : 0 ;
+  const tax = (total + shipping) * 0.10; 
   const grandTotal = (total + shipping + tax);
   return (
     <div className="order-product">
